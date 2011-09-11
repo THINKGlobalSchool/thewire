@@ -8,7 +8,7 @@ $english = array(
 	/**
 	 * Menu items and titles
 	 */
-	'thewire' => "The Wire",
+	'thewire' => "Mini Post",
 	'thewire:everyone' => "All wire posts",
 	'thewire:user' => "%s's wire posts",
 	'thewire:friends' => "Friends' wire posts",
@@ -47,6 +47,7 @@ $english = array(
 	'thewire:blank' => "Sorry, you need to enter some text before we can post this.",
 	'thewire:notfound' => "Sorry, we could not find the specified wire post.",
 	'thewire:notdeleted' => "Sorry. We could not delete this wire post.",
+	'thewire:invalid' => 'Invalid post',
 
 	/**
 	 * Notifications

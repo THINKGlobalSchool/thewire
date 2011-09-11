@@ -47,7 +47,7 @@ function thewire_init() {
 	elgg_extend_view('js/initialise_elgg', 'thewire/js/textcounter');
 
 	// Register a page handler, so we can have nice URLs
-	//elgg_register_page_handler('thewire', 'thewire_page_handler');
+	elgg_register_page_handler('thewire', 'thewire_page_handler');
 
 	// Register a URL handler for thewire posts
 	elgg_register_entity_url_handler('object', 'thewire', 'thewire_url');
@@ -96,6 +96,7 @@ function thewire_page_handler($page) {
 	$base_dir = elgg_get_plugins_path() . 'thewire/pages/thewire';
 
 	// if just /thewire go to global view in the else statement
+	/*
 	if (isset($page[0]) && $page[0]) {
 
 		switch ($page[0]) {
@@ -139,7 +140,25 @@ function thewire_page_handler($page) {
 	} else {
 		include "$base_dir/everyone.php";
 	}
+	*/
+	
+	if ($page[0] == 'view') {
+		$guid = $page[1];
+		$post = get_entity($guid);
+		if (!elgg_instanceof($post, 'object', 'thewire')) {
+			register_error(elgg_echo('thewire:invalid'));
+			forward(REFERER);
+		}
+		
+		$body = elgg_view_layout('content', array(
+			'filter' => '',
+			'content' => elgg_view_entity($post, array('full_view' => true)),
+			'title' => '',
+		));
 
+		echo elgg_view_page('', $body);
+	}
+	
 	return true;
 }
 
@@ -398,38 +417,6 @@ function thewire_setup_entity_menu_items($hook, $type, $value, $params) {
 			unset($value[$index]);
 		}
 	}
-
-	$entity = $params['entity'];
-
-	if (elgg_is_logged_in()) {
-		$options = array(
-			'name' => 'reply',
-			'text' => elgg_echo('thewire:reply'),
-			'href' => "thewire/reply/$entity->guid",
-			'priority' => 150,
-		);
-		$value[] = ElggMenuItem::factory($options);
-	}
-
-	if ($entity->reply) {
-		$options = array(
-			'name' => 'previous',
-			'text' => elgg_echo('thewire:previous'),
-			'href' => "thewire/previous/$entity->guid",
-			'priority' => 160,
-			'link_class' => 'thewire-previous',
-			'title' => elgg_echo('thewire:previous:help'),
-		);
-		$value[] = ElggMenuItem::factory($options);
-	}
-
-	$options = array(
-		'name' => 'thread',
-		'text' => elgg_echo('thewire:thread'),
-		'href' => "thewire/thread/$entity->wire_thread",
-		'priority' => 170,
-	);
-	$value[] = ElggMenuItem::factory($options);
 
 	return $value;
 }

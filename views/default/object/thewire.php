@@ -56,6 +56,8 @@ $list_body = elgg_view('object/elements/summary', $params);
 
 echo elgg_view_image_block($owner_icon, $list_body);
 
+echo elgg_view_comments($post);
+
 if ($post->reply) {
 	echo "<div class=\"thewire-parent hidden\" id=\"thewire-previous-{$post->guid}\">";
 	echo "</div>";
