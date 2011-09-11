@@ -17,9 +17,7 @@ $menu = elgg_view_menu('river', array(
 	'class' => 'elgg-menu-hz',
 ));
 
-//$entity = get_entity($item->object_guid);
-
-
+$entity = get_entity($item->object_guid);
 
 if (elgg_instanceof($entity, 'object', 'thewire') && $item->view == 'river/object/thewire/create') {
 	$timestamp = elgg_get_friendly_time($entity->time_created);
