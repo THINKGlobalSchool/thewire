@@ -237,10 +237,12 @@ function thewire_filter($text) {
 	$text = parse_urls($text);
 
 	// usernames
+	/* This causes weirdness with mentions
 	$text = preg_replace(
 				'/(^|[^\w])@([\w]+)/',
 				'$1<a href="' . $CONFIG->wwwroot . 'thewire/owner/$2">@$2</a>',
 				$text);
+	*/
 
 	// hashtags
 	$text = preg_replace(
