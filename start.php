@@ -76,6 +76,9 @@ function thewire_init() {
 	
 	// Hook into river create event
 	elgg_register_plugin_hook_handler('creating', 'river', 'thewire_river_handler');
+
+	// Add delete item to river menu
+	elgg_register_plugin_hook_handler('register', 'menu:river', 'thewire_river_menu_setup', 300);
 }
 
 /**
@@ -476,3 +479,28 @@ function thewire_river_handler($hook, $type, $value, $params) {
 	return $value;
 }
 
+/**
+ * Add a delete button to river actions
+ */
+function thewire_river_menu_setup($hook, $type, $return, $params) {
+	if (elgg_is_logged_in()) {
+		$item = $params['item'];
+
+		$object = $item->getObjectEntity();
+
+		if (elgg_instanceof($object, 'object', 'thewire')
+			&& (elgg_is_admin_logged_in() || $object->canEdit())) {
+				// delete link
+				$options = array(
+					'name' => 'delete',
+					'text' => elgg_view_icon('delete'),
+					'title' => elgg_echo('delete:this'),
+					'href' => "action/thewire/delete?guid={$object->getGUID()}",
+					'confirm' => elgg_echo('deleteconfirm'),
+					'priority' => 200,
+				);
+				$return[] = ElggMenuItem::factory($options);
+		}
+	}
+	return $return;
+}
