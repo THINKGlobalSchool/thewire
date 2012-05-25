@@ -72,7 +72,7 @@ function thewire_init() {
 	elgg_register_plugin_hook_handler('unit_test', 'system', 'thewire_test');
 
 	// Hook into annotation create event
-	elgg_register_event_handler('annotate', 'object', 'thewire_annotate_handler');
+	elgg_register_event_handler('create', 'annotation', 'thewire_annotate_handler');
 	
 	// Hook into river create event
 	elgg_register_plugin_hook_handler('creating', 'river', 'thewire_river_handler');
@@ -454,15 +454,16 @@ function thewire_test($hook, $type, $value, $params) {
 }
 
 function thewire_annotate_handler($event, $type, $params) {
-	if (elgg_instanceof($params, 'object', 'thewire')) {
+	$entity = get_entity($params->entity_guid);
+	if (elgg_instanceof($entity, 'object', 'thewire') && $params->name == 'generic_comment') {
 		// Nuke any other river items
 		elgg_delete_river(array(
-			'object_guid' => $params->guid,
+			'object_guid' => $entity->guid,
 			'action_type' => 'create',
 		));
 	
 		// Create new river item
-		add_to_river('river/object/thewire/create', 'create', $params->owner_guid, $params->guid);
+		add_to_river('river/object/thewire/create', 'create', $entity->owner_guid, $entity->guid);
 	}
 	return true;
 }
