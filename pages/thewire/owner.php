@@ -21,6 +21,7 @@ $content .= elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'thewire',
 	'owner_guid' => $owner->guid,
+	'full_view' => FALSE,
 	'limit' => 15,
 ));
 
