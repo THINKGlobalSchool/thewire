@@ -163,6 +163,8 @@ function thewire_page_handler($page) {
 		echo elgg_view_page('', $body);
 	} else if ($page[0] == 'owner') {
 		include "$base_dir/owner.php";
+	} else {
+		include "$base_dir/everyone.php";
 	}
 	
 	return true;
