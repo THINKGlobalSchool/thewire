@@ -18,6 +18,7 @@ $content .= elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'thewire',
 	'limit' => 15,
+	'full_view' => FALSE,
 ));
 
 $body = elgg_view_layout('content', array(
