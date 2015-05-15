@@ -23,7 +23,7 @@ if (elgg_instanceof($entity, 'object', 'thewire') && $item->view == 'river/objec
 	$timestamp = elgg_get_friendly_time($entity->time_created);
 } else {
 	// river item header
-	$timestamp = elgg_get_friendly_time($item->getPostedTime());
+	$timestamp = elgg_get_friendly_time($item->getTimePosted());
 }
 
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item'])));

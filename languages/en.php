@@ -3,7 +3,7 @@
  * The Wire English language file
  */
 
-$english = array(
+return array(
 
 	/**
 	 * Menu items and titles
@@ -57,5 +57,3 @@ $english = array(
 	'thewire:notify:post' => '%s posted:',
 
 );
-
-add_translation("en", $english);
