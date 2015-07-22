@@ -52,9 +52,9 @@ return array(
 	/**
 	 * Notifications
 	 */
-	'thewire:notify:subject' => "New mini post",
+	'thewire:notify:summary' => 'New mini post: %s',
+	'thewire:notify:subject' => "New mini post from %s",
 	'thewire:notify:reply' => '%s responded to %s\'s mini post:',
 	'thewire:notify:post' => '%s posted:',
-	'thewire:notify:footer' => ''
-
+	'thewire:notify:footer' => "View and reply:\n%s",
 );
