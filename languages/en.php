@@ -55,5 +55,6 @@ return array(
 	'thewire:notify:subject' => "New mini post",
 	'thewire:notify:reply' => '%s responded to %s\'s mini post:',
 	'thewire:notify:post' => '%s posted:',
+	'thewire:notify:footer' => ''
 
 );
